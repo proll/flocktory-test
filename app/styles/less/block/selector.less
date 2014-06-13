@@ -1,0 +1,30 @@
+.selector__campaigns {
+	margin-top: 10px;
+}
+
+	.selector__campaign-itm {
+		margin-bottom: 2px;
+		padding: 10px;
+	}
+
+	.lineX (@index) when (@index > 0) {
+		.selector__campaign-itm:nth-last-child(@{index}) { .line(@index); }
+		.lineX(@index - 1);
+	}
+	.lineX (0) {}
+	.line (@index) {
+		background: lighten(@startColor, @index*8%);
+	}
+	.lineX(8);
+
+		.selector__campaign-itm-a {
+			color: #fff;
+			float: right;
+			margin-left: 10px; 
+			&:hover,
+			&:active,
+			&:focus {
+				color: #fff;
+				text-decoration: none;
+			}
+		}

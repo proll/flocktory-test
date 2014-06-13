@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8"/>
+	<title>Flocktory test</title>
+	<meta name="description" content="Test task">
+
+	<link href='http://fonts.googleapis.com/css?family=Ubuntu:300,400,500,700&subset=latin,cyrillic' rel='stylesheet' type='text/css'>
+	<link rel="stylesheet" href="/styles/css/flt.css"/>
+
+	<!-- build:js /scripts/mdrnzr.js -->
+	<script src="/scripts/vendor/modernizr.custom.24244.js"></script>
+	<!-- endbuild -->
+</head>
+<body>
+<div class="navbar navbar-fixed-top navbar-header navbar_hidden"></div>
+<header class="page-header"></header>
+<div class="container" id="flt-container">
+	<div class="row">
+		<div class="span6 selector"></div>
+		<div class="span6 chart"></div>
+	</div>
+</div>
+<footer></footer>
+
+
+
+<div class="template" id="flt__selector_template">
+	<select class="selector__dropdown">
+	{{#each campaigns}}
+		<option value="{{id}}" data-id="{{id}}" data-title="{{title}}"  data-metrics="{{metrics}}">{{title}}</option>
+	{{/each}}
+	</select>
+	<div class="selector__campaigns"></div>
+</div>
+
+<div class="template" id="flt__selector-selected_template" type="text/x-handlebars-template">
+	{{#each selected}}
+	<div class="selector__campaign-itm">
+		<a href="del" class="selector__campaign-itm-a" rel="nofollow" data-id="{{id}}">x</a><span class="selector__campaign-title">{{title}} {{metrics.shares}}</span>
+	</div>
+	{{/each}}
+</div>
+
+<script class="template" id="flt__chart_template" type="text/x-handlebars-template">
+<svg width="140" height="110" class="chart__canvas">
+{{#each campaigns}}
+  <polyline points="0,0 {{#each metrics}}{{point.x}},{{point.y}} {{/each}}0,{{../height}} 0,0"/>
+{{/each}}
+{{#each floors}}
+	<text x="{{point.x}}" y="{{point.y}}" dx="5" dy="10">{{value}}</text>
+	<line x1="0" y1="{{point.y}}" x2="{{point.x}}" y2="{{point.y}}"/>
+{{/each}}
+</svg>
+</script>
+
+
+<!-- build:js /scripts/vendor.js -->
+	<script src="/scripts/vendor/jquery/jquery.1.9.1.js"></script>
+
+	<script src="/scripts/vendor/lodash.js"></script>
+	<script src="/scripts/vendor/backbone/backbone-0.9.10.js"></script>
+	<script src="/scripts/vendor/handlebars/handlebars.js"></script>
+	<script src="/scripts/extentions/lodash-extention.js"></script>
+<!-- endbuild -->
+
+<!-- build:js /scripts/flt.js -->
+	<!-- Flocktory app -->
+	<script src="/scripts/flt.js"></script>
+
+	<!-- APP -->
+	<script src="/scripts/core/application_model.js"></script>
+	<script src="/scripts/core/application_router.js"></script>
+
+	<script src="/scripts/blocks/campaign_model.js"></script>
+	<script src="/scripts/blocks/campaign_collection.js"></script>
+	<script src="/scripts/blocks/selector_model.js"></script>
+	<script src="/scripts/blocks/selector_view.js"></script>
+	<script src="/scripts/blocks/chart_model.js"></script>
+	<script src="/scripts/blocks/chart_view.js"></script>
+<!-- endbuild -->
+</body>
+</html>
